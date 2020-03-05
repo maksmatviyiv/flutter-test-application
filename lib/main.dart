@@ -3,47 +3,61 @@ import 'dart:math';
 
 void main() => runApp(TestApplication());
 
-class TestApplication extends StatefulWidget {
-  @override
-  _TestApplicationState createState() => _TestApplicationState();
-}
-
-class _TestApplicationState extends State<TestApplication> {
-  Random randomColor = Random();
-  Color containerBackgroundColor = Color.fromRGBO(255, 255, 255, 1);
-  Color textBackgroundColor = Color.fromRGBO(255, 255, 255, 1);
+class TestApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Solid Softwate test application",
-          ),
-        ),
-        body: GestureDetector(
-          onTap: () {
-            setState(() {
-              containerBackgroundColor = Color.fromRGBO(randomColor.nextInt(255),
-                  randomColor.nextInt(255), randomColor.nextInt(255), 1);
-              textBackgroundColor = Color.fromRGBO(randomColor.nextInt(255),
-                  randomColor.nextInt(255), randomColor.nextInt(255), 1);
-            });
-          },
-          child: Container(
-            color: containerBackgroundColor,
-            child: Center(
-              child: Text(
-                "Hey there",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
-                    backgroundColor: textBackgroundColor),
-              ),
-              ),
+      home: BodyApplication(title: "Solid softwate test application"),
+    );
+  }
+}
+
+class BodyApplication extends StatefulWidget {
+  BodyApplication({@required this.title});
+
+  final String title;
+  @override
+  _BodyApplicationState createState() => _BodyApplicationState();
+}
+
+class _BodyApplicationState extends State<BodyApplication> {
+  Color changeColor(colorValue) {
+    Random randomColor = Random();
+    setState(() {
+      colorValue = Color.fromRGBO(randomColor.nextInt(255),
+          randomColor.nextInt(255), randomColor.nextInt(255), 1);
+    });
+
+    return colorValue;
+  }
+
+  Color containerBackgroundColor = Colors.white;
+  Color textBackgroundColor = Colors.white;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: GestureDetector(
+        onTap: () {
+          containerBackgroundColor = changeColor(containerBackgroundColor);
+          textBackgroundColor = changeColor(textBackgroundColor);
+        },
+        child: Container(
+          color: containerBackgroundColor,
+          child: Center(
+            child: Text(
+              "Hey there",
+              style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: textBackgroundColor),
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
