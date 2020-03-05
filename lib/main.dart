@@ -10,7 +10,8 @@ class TestApplication extends StatefulWidget {
 
 class _TestApplicationState extends State<TestApplication> {
   Random randomColor = Random();
-  Color backgroundColor = Color.fromRGBO(255, 255, 255, 1);
+  Color containerBackgroundColor = Color.fromRGBO(255, 255, 255, 1);
+  Color textBackgroundColor = Color.fromRGBO(255, 255, 255, 1);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,21 +24,26 @@ class _TestApplicationState extends State<TestApplication> {
         body: GestureDetector(
           onTap: () {
             setState(() {
-              backgroundColor = Color.fromRGBO(randomColor.nextInt(255),
+              containerBackgroundColor = Color.fromRGBO(randomColor.nextInt(255),
+                  randomColor.nextInt(255), randomColor.nextInt(255), 1);
+              textBackgroundColor = Color.fromRGBO(randomColor.nextInt(255),
                   randomColor.nextInt(255), randomColor.nextInt(255), 1);
             });
           },
           child: Container(
-            color: backgroundColor,
+            color: containerBackgroundColor,
             child: Center(
               child: Text(
                 "Hey there",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0,
+                    backgroundColor: textBackgroundColor),
+              ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
