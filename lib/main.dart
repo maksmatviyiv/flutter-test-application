@@ -21,7 +21,7 @@ class BodyApplication extends StatefulWidget {
 }
 
 class _BodyApplicationState extends State<BodyApplication> {
-  Color changeColor(colorValue) {
+  Color changeColor(Color colorValue) {
     Random randomColor = Random();
     setState(() {
       colorValue = Color.fromRGBO(randomColor.nextInt(255),
@@ -30,7 +30,6 @@ class _BodyApplicationState extends State<BodyApplication> {
 
     return colorValue;
   }
-
   Color containerBackgroundColor = Colors.white;
   Color textBackgroundColor = Colors.white;
 
